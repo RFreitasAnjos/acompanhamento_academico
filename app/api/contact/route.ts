@@ -3,10 +3,20 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
   try {
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const emailTo = process.env.EMAIL_TO;
+
+    if (!resendApiKey || !emailTo) {
+      return NextResponse.json(
+        { error: "Variáveis de ambiente ausentes para envio de email" },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(resendApiKey);
+
     const { name, email, message } = await req.json();
 
     if (!name || !email || !message) {
@@ -18,7 +28,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "Contato <onboarding@resend.dev>",
-      to: process.env.EMAIL_TO!,
+      to: emailTo,
       subject: `Novo contato de ${name}`,
       replyTo: email,
       html: `
