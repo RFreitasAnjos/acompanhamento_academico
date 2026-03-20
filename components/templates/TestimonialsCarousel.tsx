@@ -1,6 +1,5 @@
 "use client";
 
-import { LucideStar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 
@@ -35,15 +34,6 @@ const testimonials: Testimonial[] = [
 export default function TestimonialsCarousel() {
   const [index, setIndex] = useState(0);
 
-  // AUTO PLAY
-  useEffect(() => {
-    const interval = setInterval(() => {
-      next();
-    }, 10000);
-
-    return () => clearInterval(interval);
-  }, [index]);
-
   const next = () => {
     setIndex((prev) => (prev + 1) % testimonials.length);
   };
@@ -53,6 +43,15 @@ export default function TestimonialsCarousel() {
       prev === 0 ? testimonials.length - 1 : prev - 1
     );
   };
+
+  // AUTO PLAY
+  useEffect(() => {
+    const interval = setInterval(() => {
+      next();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [index]);
 
   const testimonial = testimonials[index];
 
@@ -76,7 +75,7 @@ export default function TestimonialsCarousel() {
       </button>
 
       {/* CARD */}
-      <div className="relative h-[260px] overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-xl transition-all duration-500">
+      <div className="relative h-65 overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-xl transition-all duration-500">
 
         {/* glow */}
         <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-blue-500/20 blur-3xl" />
@@ -91,7 +90,7 @@ export default function TestimonialsCarousel() {
             {/* USER */}
             <div className="flex items-center gap-3 mt-4">
 
-              <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-r from-blue-500 to-purple-500 font-bold text-white">
                 {testimonial.name.charAt(0)}
               </div>
 

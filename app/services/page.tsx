@@ -38,7 +38,7 @@ export default function ServicesPlans() {
               {/* BADGE */}
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-1 text-xs font-semibold text-white shadow-md">
+                  <span className="rounded-full bg-linear-to-r from-blue-500 to-purple-500 px-4 py-1 text-xs font-semibold text-white shadow-md">
                     ⭐ Mais Popular
                   </span>
                 </div>

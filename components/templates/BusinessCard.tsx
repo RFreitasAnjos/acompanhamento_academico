@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function BusinessCard() {
   return (
     <section className="py-12 sm:py-16 bg-gray-50">
@@ -13,11 +15,13 @@ export default function BusinessCard() {
           <div className="relative z-10 flex flex-col items-center text-center gap-6 md:flex-row md:items-center md:text-left md:gap-10">
 
             {/* FOTO */}
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <div className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 overflow-hidden rounded-full border-4 border-white shadow-lg mx-auto md:mx-0">
-                <img
+                <Image
                   src="https://res.cloudinary.com/exercice-disp/image/upload/v1756230611/WhatsApp_Image_2025-08-25_at_21.18.13_sk0prw.jpg"
                   alt="profissional"
+                  width={144}
+                  height={144}
                   className="h-full w-full object-cover"
                 />
               </div>

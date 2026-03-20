@@ -2,13 +2,19 @@
 
 import { useState, useMemo } from "react";
 import CardMarket from "@/components/ui/CardsMarket";
-import { cardMarketMock } from "../../public/mocks/Mocks";
+import MarketSidebar from "@/components/ui/MarketSidebar";
+import { cardMarketMock } from "@/public/mocks/Mocks";
 
 export default function MarketPage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
-  const categories = ["Math", "Science", "History"];
+  const categories = useMemo(
+    () => Array.from(new Set(cardMarketMock.map((item) => item.category))),
+    []
+  );
 
   // 🔎 FILTRO + BUSCA
   const filteredItems = useMemo(() => {
@@ -21,80 +27,63 @@ export default function MarketPage() {
         ? item.category === selectedCategory
         : true;
 
-      return matchesSearch && matchesCategory;
+      const parsedMinPrice = minPrice ? Number(minPrice) : null;
+      const parsedMaxPrice = maxPrice ? Number(maxPrice) : null;
+
+      const matchesMinPrice = parsedMinPrice !== null ? item.price >= parsedMinPrice : true;
+      const matchesMaxPrice = parsedMaxPrice !== null ? item.price <= parsedMaxPrice : true;
+
+      return matchesSearch && matchesCategory && matchesMinPrice && matchesMaxPrice;
     });
-  }, [search, selectedCategory]);
+  }, [search, selectedCategory, minPrice, maxPrice]);
+
+  const handleClearFilters = () => {
+    setSearch("");
+    setSelectedCategory(null);
+    setMinPrice("");
+    setMaxPrice("");
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#eff6ff,#f8fafc_45%,#f9fafb_100%)]">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
 
         {/* HEADER */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Explore o Market
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Encontre materiais, serviços e conteúdos acadêmicos de alta qualidade.
-          </p>
+        <div className="mb-10 flex flex-col gap-4 rounded-4xl border border-white/70 bg-white/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur sm:p-8">
+          <div className="max-w-3xl space-y-3">
+            <span className="inline-flex w-fit rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">
+              Market
+            </span>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Explore o Market
+            </h1>
+            <p className="text-base leading-7 text-gray-600 sm:text-lg">
+              Encontre materiais, serviços e conteúdos acadêmicos de alta qualidade.
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-col gap-6 lg:flex-row">
 
           {/* SIDEBAR */}
-          <aside className="w-full lg:w-72">
-
-            <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-
-              {/* SEARCH */}
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar produtos..."
-                className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-
-              {/* CATEGORIES */}
-              <div className="mt-6">
-                <h2 className="mb-3 text-sm font-semibold text-gray-900">
-                  Categorias
-                </h2>
-
-                <div className="flex flex-wrap gap-2 lg:flex-col">
-
-                  <button
-                    onClick={() => setSelectedCategory(null)}
-                    className={`rounded-lg px-3 py-2 text-sm transition ${selectedCategory === null
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                      }`}
-                  >
-                    Todas
-                  </button>
-
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`rounded-lg px-3 py-2 text-sm transition ${selectedCategory === cat
-                          ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          </aside>
+          <MarketSidebar
+            search={search}
+            setSearch={setSearch}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            minPrice={minPrice}
+            setMinPrice={setMinPrice}
+            maxPrice={maxPrice}
+            setMaxPrice={setMaxPrice}
+            categories={categories}
+            onClearFilters={handleClearFilters}
+          />
 
           {/* GRID */}
           <div className="flex-1">
 
             {/* RESULT COUNT */}
-            <div className="mb-4 text-sm text-gray-500">
+            <div className="mb-4 text-sm font-medium text-gray-500">
               {filteredItems.length} resultado(s) encontrado(s)
             </div>
 
@@ -104,17 +93,20 @@ export default function MarketPage() {
                 filteredItems.map((item) => (
                   <div
                     key={item.id}
-                    className="transition-all duration-300 hover:scale-[1.02]"
+                    className="transition-all duration-300 hover:scale-[1.01]"
                   >
                     <CardMarket
+                      id={item.id}
                       title={item.title}
                       description={item.description}
                       value={item.price}
+                      category={item.category}
+                      imageUrl={item.imageUrl}
                     />
                   </div>
                 ))
               ) : (
-                <div className="col-span-full rounded-xl border border-gray-200 bg-white p-6 text-center text-gray-500">
+                <div className="col-span-full rounded-3xl border border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm">
                   Nenhum resultado encontrado.
                 </div>
               )}

@@ -4,6 +4,8 @@ import "./globals.css";
 import AOSProvider from "@/components/AOSProvider";
 import Footer from "@/components/ui/Footer";
 import Navbar from "@/components/ui/Navbar";
+import { AsideProvider } from "@/contexts/AsideContext";
+import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,11 +33,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AOSProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </AOSProvider>
+        <AsideProvider>
+          <AOSProvider>
+            <Navbar />
+            <div className="pt-16 flex-1">
+              {children}
+            </div>
+            <Footer />
+            <WhatsAppFloat />
+          </AOSProvider>
+        </AsideProvider>
       </body>
     </html>
   );

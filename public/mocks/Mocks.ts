@@ -13,23 +13,6 @@ export const usersMock = [
   }
 ];
 
-export const notificationMock = [
-  {
-    id: 1,
-    title: "New Assignment Posted",
-    message: "Your teacher has posted a new assignment for Math class.",
-    date: "2024-06-01T10:00:00Z",
-    read: false,
-  },
-   {
-      id: 2,
-      title: "Assignment Due Soon",
-      message: "Remember that your Math assignment is due tomorrow.",
-      date: "2024-06-02T10:00:00Z",
-      read: false,
-  }
-];
-
 export const ContentMock = [
   {
     id: 1,
@@ -56,7 +39,7 @@ export const cardMarketMock = [
     description: "A comprehensive textbook covering all topics in algebra.",
     category: "Books",
     price: 49.99,
-    imageUrl: "https://example.com/algebra-textbook.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   },
    {
       id: 2,
@@ -64,7 +47,7 @@ export const cardMarketMock = [
       description: "A complete geometry set including compass, protractor, and ruler.",
       category: "Supplies",
       price: 19.99,
-      imageUrl: "https://example.com/geometry-set.jpg",
+      imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 3,
@@ -72,7 +55,7 @@ export const cardMarketMock = [
     description: "Practice problems and solutions for calculus students.",
     category: "Books",
     price: 29.99,
-    imageUrl: "https://example.com/calculus-workbook.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 4,
@@ -80,8 +63,25 @@ export const cardMarketMock = [
     description: "A kit containing all necessary materials for physics experiments.",
     category: "Supplies",
     price: 59.99,
-    imageUrl: "https://example.com/physics-lab-kit.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    id: 5,
+    title: "Chemistry Flashcards",
+    description: "Flashcards covering key concepts in chemistry.",
+    category: "Study Aids",
+    price: 14.99,
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    id: 6,
+    title: "Biology Textbook",
+    description: "An in-depth textbook covering all major topics in biology.",
+    category: "Books",
+    price: 39.99,
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   }
+
 ];
 
 export const plansMock = [
@@ -159,4 +159,28 @@ export const testimonials = [
     role: "Desenvolvedor",
     message: "O marketplace é incrível, encontrei projetos muito interessantes.",
   },
+];
+
+export const notificationsMock = [
+  {
+    id: 1,
+    title: "Novo Projeto Aprovado",
+    message: "Seu projeto de pesquisa foi aprovado pelo professor.",
+    date: "2024-06-01T10:00:00Z",
+    read: false,
+  },
+  {
+    id: 2,
+    title: "Feedback Recebido",
+    message: "Você recebeu feedback sobre seu último projeto.",
+    date: "2024-06-02T14:30:00Z",
+    read: false,
+  },
+  {
+    id: 3,
+    title: "Novo Projeto Disponível",
+    message: "Um novo projeto de pesquisa foi adicionado ao marketplace.",
+    date: "2024-06-03T09:15:00Z",
+    read: false,
+  }
 ];

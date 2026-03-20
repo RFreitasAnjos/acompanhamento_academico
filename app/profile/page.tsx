@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Aside from "@/components/ui/Aside";
+import { useAside } from "@/contexts/AsideContext";
 
 export default function ProfilePage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isOpen } = useAside();
 
   useEffect(() => {
     const frameId = window.requestAnimationFrame(() => {
@@ -16,7 +18,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex flex-col lg:flex-row">
+      <div className={`flex flex-col md:flex-row ${isOpen ? "md:gap-0" : ""}`}>
         <Aside />
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
           <div className="rounded-2xl bg-white p-6 shadow-sm sm:p-8">

@@ -30,7 +30,7 @@ export default function Hero(){
                   {/* TITLE */}
                   <h1 className="mb-3 text-2xl font-bold leading-tight text-gray-900 sm:text-3xl lg:text-4xl">
                     Organize seu progresso acadêmico com{" "}
-                    <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
                       inteligência
                     </span>
                   </h1>

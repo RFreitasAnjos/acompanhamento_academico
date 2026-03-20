@@ -1,12 +1,15 @@
 "use client";
 
 import Aside from "@/components/ui/Aside";
+import { useAside } from "@/contexts/AsideContext";
 import { LucideDownload } from "lucide-react";
 
 export default function FollowUpPage() {
+  const { isOpen } = useAside();
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex flex-col lg:flex-row">
+      <div className={`flex flex-col md:flex-row ${isOpen ? "md:gap-0" : ""}`}>
         
         {/* SIDEBAR */}
         <Aside />
@@ -73,7 +76,7 @@ export default function FollowUpPage() {
 
                 <button
                   type="submit"
-                  className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-5 py-3 text-white font-semibold shadow-lg transition hover:opacity-90"
+                  className="rounded-lg bg-linear-to-r from-blue-500 to-purple-500 px-5 py-3 text-white font-semibold shadow-lg transition hover:opacity-90"
                 >
                   Submit
                 </button>

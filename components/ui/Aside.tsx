@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useAside } from "@/contexts/AsideContext";
 
 export default function Aside() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isOpen, closeAside } = useAside();
+  const asideRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const frameId = window.requestAnimationFrame(() => {
@@ -14,6 +17,19 @@ export default function Aside() {
 
     return () => window.cancelAnimationFrame(frameId);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (asideRef.current && !asideRef.current.contains(event.target as Node)) {
+        closeAside();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isOpen, closeAside]);
 
   function handleLogout() {
     window.localStorage.removeItem("academic:isAuthenticated");
@@ -24,7 +40,22 @@ export default function Aside() {
   }
 
   return (
-    <aside className="w-full bg-gray-900 p-5 text-white md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:w-72 md:shrink-0 md:overflow-y-auto">
+    <>
+      {/* BACKDROP OVERLAY */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 top-16 z-30 bg-black/50 transition-opacity duration-300 md:hidden"
+          onClick={closeAside}
+        />
+      )}
+
+      {/* ASIDE DRAWER */}
+      <aside
+        ref={asideRef}
+        className={`fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-72 overflow-y-auto bg-gray-900 p-5 text-white transition-transform duration-300 ease-out md:static md:h-screen md:shrink-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
+      >
       {isAuthenticated ? (
         <div className="space-y-6">
           
@@ -55,7 +86,7 @@ export default function Aside() {
           <button
             type="button"
             onClick={handleLogout}
-            className="w-full rounded-2xl bg-gradient-to-r from-red-500 to-red-600 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:opacity-90"
+            className="w-full rounded-2xl bg-linear-to-r from-red-500 to-red-600 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:opacity-90"
           >
             Logout
           </button>
@@ -70,10 +101,10 @@ export default function Aside() {
                 <Link href="/followup" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Follow Up</Link>
               </li>
               <li>
-                <Link href="/market" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Market</Link>
+                <Link href="/settings" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Settings</Link>
               </li>
               <li>
-                <Link href="/contact" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Contact</Link>
+                <Link href="/support" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Support</Link>
               </li>
             </ul>
           </nav>
@@ -95,24 +126,9 @@ export default function Aside() {
             </ul>
           </div>
 
-          <nav>
-            <ul className="grid grid-cols-2 gap-2 md:grid-cols-1">
-              <li>
-                <Link href="/" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Home</Link>
-              </li>
-              <li>
-                <Link href="/services" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Services</Link>
-              </li>
-              <li>
-                <Link href="/market" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Market</Link>
-              </li>
-              <li>
-                <Link href="/contact" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Contact</Link>
-              </li>
-            </ul>
-          </nav>
         </div>
       )}
-    </aside>
+      </aside>
+    </>
   );
 }

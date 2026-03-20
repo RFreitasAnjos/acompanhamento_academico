@@ -1,11 +1,10 @@
-import CardMarket from "@/components/ui/CardsMarket";
 import AOSReveal from "@/components/AOSReveal";
-import Link from "next/link";
 import { cardMarketMock } from "@/public/mocks/Mocks";
 import Hero from "@/components/templates/Hero";
 import BusinessCard from "@/components/templates/BusinessCard";
 import Testimonials from "@/components/templates/Testimonials";
 import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
+import CardMarket from "@/components/ui/CardsMarket";
 
 export default function Home() {
   return (
@@ -14,13 +13,11 @@ export default function Home() {
 
       {/* MARKET */}
       <section className="relative bg-white py-12 sm:py-16 lg:py-16">
-
         {/* BACKGROUND EFFECT */}
         <div className="absolute -top-16 right-0 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
         <div className="absolute -bottom-16 left-0 h-72 w-72 rounded-full bg-purple-500/10 blur-3xl" />
 
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-
           {/* HEADER */}
           <div className="mb-10 text-center lg:mb-12">
             <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
@@ -34,7 +31,6 @@ export default function Home() {
 
           {/* GRID */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
             {[...cardMarketMock]
               .reverse()
               .slice(0, 3)
@@ -42,52 +38,40 @@ export default function Home() {
                 const isHighlight = index === 0;
 
                 return (
-                  <Link
+                  <AOSReveal
                     key={item.id}
-                    href={`/market/${item.id}`}
-                    className="group block h-full"
+                    animation="fade-up"
+                    delay={index * 150}
+                    className="h-full"
                   >
-                    <AOSReveal
-                      animation="fade-up"
-                      delay={index * 150}
-                      className="h-full"
+                    <div
+                      className={`
+                        relative flex h-full flex-col overflow-hidden rounded-3xl border bg-white p-1
+                        transition-all duration-300
+                        hover:-translate-y-1 hover:shadow-xl
+                        ${isHighlight ? "border-blue-500 ring-2 ring-blue-200" : "border-gray-200"}
+                      `}
                     >
+                      {/* glow interno */}
+                      {isHighlight && (
+                        <div className="absolute inset-0 bg-linear-to-r from-blue-500/5 to-purple-500/5" />
+                      )}
 
-                      <div
-                        className={`
-                    relative flex h-full flex-col overflow-hidden rounded-3xl border bg-white p-1
-                    transition-all duration-300
-                    hover:-translate-y-1 hover:shadow-xl
-                    ${isHighlight
-                            ? 'border-blue-500 ring-2 ring-blue-200'
-                            : 'border-gray-200'
-                          }
-                  `}
-                      >
-
-                        {/* glow interno */}
-                        {isHighlight && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5" />
-                        )}
-
-                        <div className="relative flex h-full flex-col justify-between rounded-3xl bg-white p-5 sm:p-6">
-
-                          <CardMarket
-                            title={item.title}
-                            description={item.description}
-                            value={item.price}
-                          />
-
-                        </div>
+                      <div className="relative flex h-full flex-col justify-between rounded-3xl bg-white p-5 sm:p-6">
+                        <CardMarket
+                          id={item.id}
+                          title={item.title}
+                          description={item.description}
+                          value={item.price}
+                          category={item.category}
+                          imageUrl={item.imageUrl}
+                        />
                       </div>
-
-                    </AOSReveal>
-                  </Link>
+                    </div>
+                  </AOSReveal>
                 );
               })}
-
           </div>
-
         </div>
       </section>
 
@@ -116,6 +100,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <WhatsAppFloat />
     </div>
   );
