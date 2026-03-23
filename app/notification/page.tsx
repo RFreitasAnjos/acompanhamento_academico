@@ -20,8 +20,8 @@ export default function NotificationPage() {
     <div className="mx-auto w-full px-4 py-8 sm:px-6 lg:px-8">
       {/* HEADER */}
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Notificações</h1>
-        <p className="text-gray-500">Acompanhe suas notificações recentes.</p>
+        <h1 className="text-3xl font-bold text-foreground">Notificações</h1>
+        <p className="text-muted">Acompanhe suas notificações recentes.</p>
       </div>
 
       {/* NOTIFICATIONS LIST */}
@@ -30,14 +30,14 @@ export default function NotificationPage() {
           <div
             key={notification.id}
             className={`flex items-center justify-between rounded-2xl border p-4 shadow transition-all duration-300 ${
-              notification.read ? "bg-white border-gray-200" : "bg-blue-50 border-blue-400"
+              notification.read ? "border-border bg-surface" : "border-primary/30 bg-primary-soft/60"
             }`}
           >
             {/* LEFT: Notification Content */}
             <div className="flex flex-col">
-              <h2 className="text-lg font-semibold text-gray-900">{notification.title}</h2>
-              <p className="text-gray-700">{notification.message}</p>
-              <p className="text-xs text-gray-400 mt-1">{new Date(notification.date).toLocaleString()}</p>
+              <h2 className="text-lg font-semibold text-foreground">{notification.title}</h2>
+              <p className="text-foreground/80">{notification.message}</p>
+              <p className="mt-1 text-xs text-muted">{new Date(notification.date).toLocaleString()}</p>
             </div>
 
             {/* RIGHT: Actions */}
@@ -45,7 +45,7 @@ export default function NotificationPage() {
               {/* Toggle Read */}
               <button
                 onClick={() => toggleRead(notification.id)}
-                className="text-blue-500 hover:text-blue-600 transition"
+                className="text-primary transition hover:text-primary-hover"
                 title={notification.read ? "Marcar como não lida" : "Marcar como lida"}
               >
                 {notification.read ? <FaCheckCircle size={20} /> : <FaRegCircle size={20} />}
@@ -54,7 +54,7 @@ export default function NotificationPage() {
               {/* Go to Profile */}
               <Link
                 href="/profile"
-                className="rounded-lg bg-blue-600 px-3 py-1 text-white text-sm font-medium hover:bg-blue-700 transition"
+                className="rounded-lg bg-primary px-3 py-1 text-sm font-medium text-white transition hover:bg-primary-hover"
               >
                 Perfil
               </Link>

@@ -8,23 +8,23 @@ import CardMarket from "@/components/ui/CardsMarket";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background text-foreground">
       <Hero />
 
       {/* MARKET */}
-      <section className="relative bg-white py-12 sm:py-16 lg:py-16">
-        {/* BACKGROUND EFFECT */}
-        <div className="absolute -top-16 right-0 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute -bottom-16 left-0 h-72 w-72 rounded-full bg-purple-500/10 blur-3xl" />
+      <section className="relative bg-surface py-12 sm:py-16 lg:py-16">
+        {/* BACKGROUND EFFECT (mais suave e inclusivo) */}
+        <div className="absolute -top-16 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-16 left-0 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
 
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {/* HEADER */}
           <div className="mb-10 text-center lg:mb-12">
-            <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
+            <h2 className="mb-3 text-2xl font-bold sm:text-3xl lg:text-4xl">
               Explore o Market
             </h2>
 
-            <p className="mx-auto max-w-2xl text-sm text-gray-600 sm:text-base">
+            <p className="mx-auto max-w-2xl text-sm text-muted sm:text-base">
               Descubra uma variedade de recursos acadêmicos, desde materiais de estudo até serviços personalizados, tudo em um só lugar.
             </p>
           </div>
@@ -46,18 +46,28 @@ export default function Home() {
                   >
                     <div
                       className={`
-                        relative flex h-full flex-col overflow-hidden rounded-3xl border bg-white p-1
+                        relative flex h-full flex-col overflow-hidden rounded-3xl border bg-surface p-1
                         transition-all duration-300
                         hover:-translate-y-1 hover:shadow-xl
-                        ${isHighlight ? "border-blue-500 ring-2 ring-blue-200" : "border-gray-200"}
+                        ${
+                          isHighlight
+                            ? "border-primary ring-2 ring-primary/20"
+                            : "border-border"
+                        }
                       `}
                     >
-                      {/* glow interno */}
                       {isHighlight && (
-                        <div className="absolute inset-0 bg-linear-to-r from-blue-500/5 to-purple-500/5" />
+                        <div className="absolute right-4 top-4 z-20 rounded-full bg-linear-to-r from-primary to-secondary px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-white shadow-lg shadow-primary/20">
+                          New
+                        </div>
                       )}
 
-                      <div className="relative flex h-full flex-col justify-between rounded-3xl bg-white p-5 sm:p-6">
+                      {/* glow interno */}
+                      {isHighlight && (
+                        <div className="absolute inset-0 bg-linear-to-r from-primary/5 to-secondary/5" />
+                      )}
+
+                      <div className="relative flex h-full flex-col justify-between rounded-3xl bg-surface p-5 sm:p-6">
                         <CardMarket
                           id={item.id}
                           title={item.title}
@@ -77,14 +87,18 @@ export default function Home() {
 
       {/* TESTIMONIALS */}
       <Testimonials />
+
       {/* BUSINESS CARD */}
       <BusinessCard />
 
       {/* NEWSLETTER */}
-      <section className="bg-gray-100 py-12 sm:py-16">
+      <section className="bg-background py-12 sm:py-16">
         <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
-          <h2 className="mb-2 text-2xl font-bold">Fique por dentro</h2>
-          <p className="mb-6 text-gray-600">
+          <h2 className="mb-2 text-2xl font-bold">
+            Fique por dentro
+          </h2>
+
+          <p className="mb-6 text-muted">
             Receba novidades e atualizações direto no seu email.
           </p>
 
@@ -92,9 +106,10 @@ export default function Home() {
             <input
               type="email"
               placeholder="Seu email"
-              className="flex-1 rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input flex-1 rounded-lg px-4 py-3"
             />
-            <button className="rounded-lg bg-blue-500 px-6 py-3 text-white transition hover:bg-blue-600 sm:whitespace-nowrap">
+
+            <button className="btn-primary rounded-lg px-6 py-3 sm:whitespace-nowrap">
               Inscrever-se
             </button>
           </div>

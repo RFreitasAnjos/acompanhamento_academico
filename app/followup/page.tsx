@@ -8,7 +8,7 @@ export default function FollowUpPage() {
   const { isOpen } = useAside();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <div className={`flex flex-col md:flex-row ${isOpen ? "md:gap-0" : ""}`}>
         
         {/* SIDEBAR */}
@@ -19,7 +19,7 @@ export default function FollowUpPage() {
           
           {/* HEADER */}
           <div className="mb-6 flex items-center justify-center gap-4">
-            <h1 className="text-2xl font-bold sm:text-3xl text-gray-900">
+            <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
               Follow Up
             </h1>
           </div>
@@ -28,8 +28,8 @@ export default function FollowUpPage() {
           <div className="grid gap-6">
 
             {/* RECENT ACTIVITIES */}
-            <div className="rounded-3xl border border-gray-200 bg-white p-5 sm:p-6 shadow-xl">
-              <h2 className="mb-4 text-xl font-bold text-gray-900">Recent Activities</h2>
+            <div className="rounded-3xl border border-border bg-surface p-5 shadow-xl sm:p-6">
+              <h2 className="mb-4 text-xl font-bold text-foreground">Recent Activities</h2>
 
               <ul className="flex flex-col gap-4">
                 {[
@@ -39,44 +39,44 @@ export default function FollowUpPage() {
                 ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-4 shadow hover:shadow-lg transition"
+                    className="flex flex-col justify-between rounded-2xl border border-border bg-surface p-4 shadow transition hover:shadow-lg"
                   >
-                    <span className="text-sm font-medium text-gray-500">{item.name}</span>
-                    <p className="text-gray-700">{item.text}</p>
-                    <span className="mt-2 text-sm text-gray-500">{item.time}</span>
+                    <span className="text-sm font-medium text-muted">{item.name}</span>
+                    <p className="text-foreground">{item.text}</p>
+                    <span className="mt-2 text-sm text-muted">{item.time}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* FORM */}
-            <div className="rounded-3xl border border-gray-200 bg-white p-5 sm:p-6 shadow-xl">
-              <h2 className="mb-4 text-xl font-bold text-gray-900">Add Follow Up</h2>
+            <div className="rounded-3xl border border-border bg-surface p-5 shadow-xl sm:p-6">
+              <h2 className="mb-4 text-xl font-bold text-foreground">Add Follow Up</h2>
 
               <form className="grid gap-4">
                 <input
                   type="text"
                   placeholder="Title"
-                  className="rounded-lg border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="rounded-lg border border-border bg-surface px-3 py-2 text-foreground outline-none placeholder:text-muted focus:ring-2 focus:ring-primary/20"
                 />
                 <textarea
                   placeholder="Description"
-                  className="rounded-lg border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="rounded-lg border border-border bg-surface px-3 py-2 text-foreground outline-none placeholder:text-muted focus:ring-2 focus:ring-primary/20"
                   rows={4}
                 />
 
                 {/* UPLOAD */}
                 <div className="flex flex-wrap items-center gap-4">
-                  <label className="flex items-center gap-2 rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 cursor-pointer hover:bg-gray-100 transition">
-                    <LucideDownload className="text-gray-500" />
-                    <span className="text-gray-700 text-sm">Upload file</span>
+                  <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-surface-muted px-3 py-2 transition hover:bg-surface">
+                    <LucideDownload className="text-muted" />
+                    <span className="text-sm text-foreground">Upload file</span>
                     <input type="file" className="hidden" />
                   </label>
                 </div>
 
                 <button
                   type="submit"
-                  className="rounded-lg bg-linear-to-r from-blue-500 to-purple-500 px-5 py-3 text-white font-semibold shadow-lg transition hover:opacity-90"
+                  className="rounded-lg bg-linear-to-r from-primary to-secondary px-5 py-3 font-semibold text-white shadow-lg transition hover:opacity-90"
                 >
                   Submit
                 </button>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { FaStar, FaCheck } from "react-icons/fa";
 
 export default function SocialProof() {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,24 +33,24 @@ export default function SocialProof() {
       className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4"
     >
       {/* CARD */}
-      <div className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm">
-        <p className="text-xl font-bold text-gray-900">+{Math.floor(alunos)}</p>
-        <p className="text-xs text-gray-500">Alunos atendidos</p>
+      <div className="rounded-xl border border-border bg-surface p-4 text-center shadow-sm">
+        <p className="text-xl font-bold text-foreground">+{Math.floor(alunos)}</p>
+        <p className="text-xs text-muted">Alunos atendidos</p>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm">
-        <p className="text-xl font-bold text-gray-900">{avaliacao}⭐</p>
-        <p className="text-xs text-gray-500">Avaliação média</p>
+      <div className="rounded-xl border border-border bg-surface p-4 text-center shadow-sm">
+        <p className="text-xl font-bold text-foreground">{avaliacao}<FaStar className="inline-block ml-1 text-accent" /></p>
+        <p className="text-xs text-muted">Avaliação média</p>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm">
-        <p className="text-xl font-bold text-gray-900">{media}</p>
-        <p className="text-xs text-gray-500">Média de notas</p>
+      <div className="rounded-xl border border-border bg-surface p-4 text-center shadow-sm">
+        <p className="text-xl font-bold text-foreground">{media}</p>
+        <p className="text-xs text-muted">Média de notas</p>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm">
-        <p className="text-xl font-bold text-green-600">✔</p>
-        <p className="text-xs text-gray-500">Resultados comprovados</p>
+      <div className="rounded-xl border border-border bg-surface p-4 text-center shadow-sm">
+        <p className="text-xl font-bold text-success"><FaCheck className="inline-block ml-1" /></p>
+        <p className="text-xs text-muted">Resultados comprovados</p>
       </div>
     </div>
   );

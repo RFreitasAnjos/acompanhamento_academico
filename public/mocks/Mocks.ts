@@ -80,8 +80,23 @@ export const cardMarketMock = [
     category: "Books",
     price: 39.99,
     imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    id:7,
+    title: "History Documentary",
+    description: "A documentary exploring significant historical events.",
+    category: "Media",
+    price: 9.99,
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    id: 8,
+    title: "Antropology History Book",
+    description: "A comprehensive book covering the history of anthropology.",
+    category: "Books",
+    price: 34.99,
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   }
-
 ];
 
 export const plansMock = [
@@ -98,8 +113,8 @@ export const plansMock = [
     ],
     cta: 'Começar Agora',
     popular: false,
-    bgColor: 'bg-zinc-800/30',
-    borderColor: 'border-zinc-700',
+    bgColor: 'bg-surface-muted',
+    borderColor: 'border-border',
   },
   {
     name: 'Ouro',
@@ -116,8 +131,8 @@ export const plansMock = [
     ],
     cta: 'Escolher Plano',
     popular: true,
-    bgColor: 'bg-gradient-to-b from-yellow-500/10 to-yellow-600/5',
-    borderColor: 'border-yellow-500/50',
+    bgColor: 'bg-gradient-to-b from-primary-soft to-secondary-soft',
+    borderColor: 'border-primary/50',
   },
   {
     name: 'Platinum',
@@ -135,8 +150,8 @@ export const plansMock = [
     ],
     cta: 'Contrate Agora',
     popular: false,
-    bgColor: 'bg-zinc-800/40',
-    borderColor: 'border-zinc-600',
+    bgColor: 'bg-surface-muted',
+    borderColor: 'border-border',
   },
 ];
 

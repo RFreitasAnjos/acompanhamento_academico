@@ -3,9 +3,9 @@ import AOSReveal from "../AOSReveal";
 
 export default function Testimonials() {
    return (
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-background py-12 sm:py-16">
          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-10 text-center text-2xl font-bold sm:text-3xl">
+            <h2 className="mb-10 text-center text-2xl font-bold text-foreground sm:text-3xl">
                O que estão dizendo os nossos clientes
             </h2>
 
@@ -15,13 +15,13 @@ export default function Testimonials() {
                      key={t.id}
                      animation="fade-up"
                      delay={index * 100}
-                     className="h-full rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8 flex flex-col justify-between"
+                     className="flex h-full flex-col justify-between rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8"
                   >
                      <div>
-                        <h4 className="font-bold text-gray-800">{t.name}</h4>
-                        <span className="text-sm text-gray-500">{t.role}</span>
+                        <h4 className="font-bold text-foreground">{t.name}</h4>
+                        <span className="text-sm text-muted">{t.role}</span>
                      </div>
-                     <p className="text-gray-600 mb-6">
+                     <p className="mb-6 text-muted">
                         &ldquo;{t.message}&rdquo;
                      </p>
                   </AOSReveal>

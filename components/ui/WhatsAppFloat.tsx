@@ -3,10 +3,10 @@
 export default function WhatsAppFloat() {
   return (
     <a
-      href="https://wa.me/5581984671475"
+      href="https://wa.me/5581984671475?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20projetos%20acad%C3%AAmicos."
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-green-500 px-4 py-3 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-green-600 hover:shadow-xl"
+      className="fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-success px-4 py-3 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:opacity-90 hover:shadow-xl"
     >
       {/* ÍCONE */}
       <svg
@@ -18,7 +18,7 @@ export default function WhatsAppFloat() {
       </svg>
 
       {/* TEXTO (some no mobile pequeno) */}
-      <span className="hidden sm:block text-sm font-medium">
+      <span className="hidden text-sm font-medium sm:block">
         Fale conosco
       </span>
     </a>

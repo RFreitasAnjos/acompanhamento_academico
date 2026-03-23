@@ -44,7 +44,7 @@ export default function Aside() {
       {/* BACKDROP OVERLAY */}
       {isOpen && (
         <div
-          className="fixed inset-0 top-16 z-30 bg-black/50 transition-opacity duration-300 md:hidden"
+          className="fixed inset-0 top-16 z-30 bg-slate-950/55 transition-opacity duration-300 md:hidden"
           onClick={closeAside}
         />
       )}
@@ -52,7 +52,7 @@ export default function Aside() {
       {/* ASIDE DRAWER */}
       <aside
         ref={asideRef}
-        className={`fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-72 overflow-y-auto bg-gray-900 p-5 text-white transition-transform duration-300 ease-out md:static md:h-screen md:shrink-0 ${
+        className={`fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-72 overflow-y-auto bg-slate-950 p-5 text-slate-100 transition-transform duration-300 ease-out md:static md:h-screen md:shrink-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
@@ -72,12 +72,12 @@ export default function Aside() {
             </div>
             <div className="text-center md:text-left">
               <h2 className="text-xl font-semibold md:text-2xl">Perfil</h2>
-              <p className="text-sm text-gray-300">Você está autenticado.</p>
+              <p className="text-sm text-slate-300">Você está autenticado.</p>
             </div>
           </div>
 
           {/* STATUS CARD */}
-          <div className="rounded-3xl bg-white/10 p-4 text-gray-200 shadow-inner">
+          <div className="rounded-3xl bg-white/10 p-4 text-slate-200 shadow-inner">
             <p className="font-medium text-white">Acesso ativo</p>
             <p className="mt-1 text-sm">Aqui você pode acompanhar seu painel, atividades e serviços vinculados à conta.</p>
           </div>
@@ -95,16 +95,16 @@ export default function Aside() {
           <nav>
             <ul className="grid grid-cols-2 gap-2 md:grid-cols-1">
               <li>
-                <Link href="/profile" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Profile</Link>
+                <Link href="/profile" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-white/10">Profile</Link>
               </li>
               <li>
-                <Link href="/followup" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Follow Up</Link>
+                <Link href="/followup" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-white/10">Follow Up</Link>
               </li>
               <li>
-                <Link href="/settings" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Settings</Link>
+                <Link href="/settings" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-white/10">Settings</Link>
               </li>
               <li>
-                <Link href="/support" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-gray-800">Support</Link>
+                <Link href="/support" className="block rounded-xl px-4 py-2 text-sm transition hover:bg-white/10">Support</Link>
               </li>
             </ul>
           </nav>
@@ -113,12 +113,12 @@ export default function Aside() {
         <div className="space-y-6">
           <div className="text-center md:text-left">
             <h2 className="text-xl font-semibold md:text-2xl">Acesso público</h2>
-            <p className="text-sm text-gray-300">Você está navegando sem autenticação.</p>
+            <p className="text-sm text-slate-300">Você está navegando sem autenticação.</p>
           </div>
 
-          <div className="rounded-3xl bg-white/10 p-4 text-gray-200 shadow-inner">
+          <div className="rounded-3xl bg-white/10 p-4 text-slate-200 shadow-inner">
             <p className="font-medium text-white">Informações acessíveis</p>
-            <ul className="mt-2 space-y-2 text-gray-300 text-sm">
+            <ul className="mt-2 space-y-2 text-sm text-slate-300">
               <li>• Serviços disponíveis</li>
               <li>• Market público</li>
               <li>• Contato e suporte</li>
