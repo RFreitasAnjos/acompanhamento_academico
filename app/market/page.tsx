@@ -18,7 +18,15 @@ function GridModeIcon({ columns }: { columns: GridColumns }) {
 
   return (
     <span className="flex items-center justify-center rounded-xl bg-surface-muted p-2">
-      <span className={`grid gap-0.5 ${columns === 4 ? 'grid-cols-2' : columns === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+      <span
+        className={`grid gap-0.5 ${
+          columns === 4
+            ? "grid-cols-2"
+            : columns === 3
+            ? "grid-cols-3"
+            : "grid-cols-2"
+        }`}
+      >
         {cells.map((_, index) => (
           <span
             key={index}
@@ -35,21 +43,31 @@ export default function MarketPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [gridColumns, setGridColumns] = useState<GridColumns>(3);
 
-  useEffect(() => {
-    const storedColumns = window.localStorage.getItem("academic:market-grid-columns");
-    if (storedColumns === "2" || storedColumns === "3" || storedColumns === "4") {
-      setGridColumns(Number(storedColumns) as GridColumns);
-      return;
+  // ✅ Inicialização correta (sem useEffect)
+  const [gridColumns, setGridColumns] = useState<GridColumns>(() => {
+    if (typeof window === "undefined") return 3;
+
+    const stored = window.localStorage.getItem(
+      "academic:market-grid-columns"
+    );
+
+    if (stored === "2" || stored === "3" || stored === "4") {
+      return Number(stored) as GridColumns;
     }
 
     const width = window.innerWidth;
-    setGridColumns(width >= 1280 ? 4 : width >= 768 ? 3 : 2);
-  }, []);
+    return width >= 1280 ? 4 : width >= 768 ? 3 : 2;
+  });
 
+  // ✅ Persistência (permitido)
   useEffect(() => {
-    window.localStorage.setItem("academic:market-grid-columns", String(gridColumns));
+    if (typeof window === "undefined") return;
+
+    window.localStorage.setItem(
+      "academic:market-grid-columns",
+      String(gridColumns)
+    );
   }, [gridColumns]);
 
   const categories = useMemo(
@@ -57,7 +75,7 @@ export default function MarketPage() {
     []
   );
 
-  // 🔎 FILTRO + BUSCA
+  // 🔎 Filtro + busca
   const filteredItems = useMemo(() => {
     return cardMarketMock.filter((item) => {
       const matchesSearch = item.title
@@ -71,10 +89,18 @@ export default function MarketPage() {
       const parsedMinPrice = minPrice ? Number(minPrice) : null;
       const parsedMaxPrice = maxPrice ? Number(maxPrice) : null;
 
-      const matchesMinPrice = parsedMinPrice !== null ? item.price >= parsedMinPrice : true;
-      const matchesMaxPrice = parsedMaxPrice !== null ? item.price <= parsedMaxPrice : true;
+      const matchesMinPrice =
+        parsedMinPrice !== null ? item.price >= parsedMinPrice : true;
 
-      return matchesSearch && matchesCategory && matchesMinPrice && matchesMaxPrice;
+      const matchesMaxPrice =
+        parsedMaxPrice !== null ? item.price <= parsedMaxPrice : true;
+
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesMinPrice &&
+        matchesMaxPrice
+      );
     });
   }, [search, selectedCategory, minPrice, maxPrice]);
 
@@ -87,14 +113,8 @@ export default function MarketPage() {
 
   const handleToggleGridColumns = () => {
     setGridColumns((currentColumns) => {
-      if (currentColumns === 2) {
-        return 3;
-      }
-
-      if (currentColumns === 3) {
-        return 4;
-      }
-
+      if (currentColumns === 2) return 3;
+      if (currentColumns === 3) return 4;
       return 2;
     });
   };
@@ -102,7 +122,7 @@ export default function MarketPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="relative mx-auto max-w-7xl overflow-hidden px-4 py-10 sm:px-6 lg:px-8">
-
+        {/* Background effects */}
         <div className="pointer-events-none absolute left-0 top-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
         <div className="pointer-events-none absolute right-0 top-32 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
 
@@ -122,7 +142,6 @@ export default function MarketPage() {
         </div>
 
         <div className="flex flex-col gap-6 lg:flex-row">
-
           {/* SIDEBAR */}
           <MarketSidebar
             search={search}
@@ -139,8 +158,7 @@ export default function MarketPage() {
 
           {/* GRID */}
           <div className="flex-1">
-
-            {/* GRID CONTROLS */}
+            {/* CONTROLES */}
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div className="text-sm font-medium text-muted">
                 {filteredItems.length} resultado(s) encontrado(s)
@@ -170,8 +188,8 @@ export default function MarketPage() {
               </button>
             </div>
 
+            {/* GRID ITEMS */}
             <div className={gridClassByColumns[gridColumns]}>
-
               {filteredItems.length > 0 ? (
                 filteredItems.map((item) => (
                   <div
@@ -193,7 +211,6 @@ export default function MarketPage() {
                   Nenhum resultado encontrado.
                 </div>
               )}
-
             </div>
           </div>
         </div>
