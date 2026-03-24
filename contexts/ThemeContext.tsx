@@ -6,6 +6,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
   useCallback,
 } from 'react';
 
@@ -13,6 +14,7 @@ export type ThemePreference = 'system' | 'light' | 'dark';
 type ResolvedTheme = 'light' | 'dark';
 
 type ThemeContextValue = {
+  mounted: boolean;
   themePreference: ThemePreference;
   resolvedTheme: ResolvedTheme;
   systemTheme: ResolvedTheme;
@@ -21,6 +23,7 @@ type ThemeContextValue = {
 };
 
 const STORAGE_KEY = 'academic:theme-preference';
+const emptySubscribe = () => () => undefined;
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
@@ -50,6 +53,12 @@ function resolveTheme(
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+
   const [themePreference, setThemePreferenceState] =
     useState<ThemePreference>(() => getStoredTheme());
 
@@ -100,13 +109,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const contextValue = useMemo<ThemeContextValue>(
     () => ({
+      mounted,
       themePreference,
       resolvedTheme,
       systemTheme,
       setThemePreference: setThemePreferenceState,
       toggleTheme,
     }),
-    [themePreference, resolvedTheme, systemTheme, toggleTheme]
+    [mounted, themePreference, resolvedTheme, systemTheme, toggleTheme]
   );
 
   return (
